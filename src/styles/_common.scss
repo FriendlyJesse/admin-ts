@@ -2,6 +2,11 @@
   @include clearfix;
 }
 
+@font-face{
+  font-family: 'Poppins'; 
+  src: url('../assets/fonts/Poppins.ttf');
+}
+
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: 'Poppins', 'Avenir', Helvetica, Arial, sans-serif;
 }
