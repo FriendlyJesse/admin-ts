@@ -1,17 +1,38 @@
 <template>
   <section class="login-form">
-    <h4 class="title">登录</h4>
-    <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
+    <h4 class="title">
+      登录
+    </h4>
+    <el-form
+      ref="ruleForm"
+      :model="ruleForm"
+      :rules="rules"
+    >
       <el-form-item prop="user">
-        <el-input v-model="ruleForm.user" prefix-icon="iconfont iconuser" placeholder="账号"></el-input>
+        <el-input
+          v-model="ruleForm.user"
+          prefix-icon="iconfont iconuser"
+          placeholder="账号"
+        />
       </el-form-item>
       <el-form-item prop="password">
-        <el-input v-model="ruleForm.password" prefix-icon="iconfont iconpassword" placeholder="密码"></el-input>
+        <el-input
+          v-model="ruleForm.password"
+          prefix-icon="iconfont iconpassword"
+          placeholder="密码"
+        />
       </el-form-item>
       <el-form-item class="submit">
-        <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+        <el-button
+          type="primary"
+          @click="submitForm('ruleForm')"
+        >
+          提交
+        </el-button>
       </el-form-item>
-      <p class="forget">忘记密码？</p>
+      <p class="forget">
+        忘记密码？
+      </p>
     </el-form>
   </section>
 </template>
@@ -38,7 +59,7 @@ export default class LoginForm extends Vue {
     ]
   }
 
-  submitForm(formName: string) {
+  submitForm (formName: string) {
     (this.$refs[formName] as ElForm).validate((valid) => {
       if (valid) {
         alert('submit!');

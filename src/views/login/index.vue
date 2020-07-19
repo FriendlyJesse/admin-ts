@@ -51,8 +51,11 @@ $color: #c4c3ca;
   height: 100%;
 
   &__container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     width: 440px;
-    margin: 8vh auto 0;
   }
 
   &__top {
