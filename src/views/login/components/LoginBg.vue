@@ -1,13 +1,13 @@
 <template>
   <section id="bg">
-    <canvas id="bgCanvas"></canvas>
+    <canvas id="bgCanvas" />
   </section>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue } from 'vue-property-decorator'
 
-let tick = 0;
+let tick = 0
 const options = {
   len: 20,
   count: 50,
@@ -18,7 +18,7 @@ const options = {
   sparkChance: 0.1,
   sparkDist: 10,
   sparkSize: 2,
-  color: `hsl(tone, 100%, light%)`,
+  color: 'hsl(tone, 100%, light%)',
   baseLight: 50,
   addedLight: 10,
   shadowToTimePropMult: 6,
@@ -28,13 +28,13 @@ const options = {
   oy: 0,
   repaintAlpha: 0.04,
   toneChange: 0.1
-};
+}
 
-const lines: any = [];
-let dieX = 0;
-let dieY = 0;
-let clientHeight = 0;
-let clientWidth = 0;
+const lines: any = []
+let dieX = 0
+let dieY = 0
+let clientHeight = 0
+let clientWidth = 0
 
 class Line {
   private x = 0;
@@ -43,7 +43,7 @@ class Line {
   private addedY = 0;
   private radius = 0;
   private lightInputMultiplier = 0;
-  private color = "";
+  private color = '';
   private cumulativeTime = 0;
   private time = 0;
   private targetTime = 0;
@@ -51,37 +51,37 @@ class Line {
   private ctx: CanvasRenderingContext2D;
   private baseRadius = (Math.PI * 2) / 6;
 
-  constructor(ctx: CanvasRenderingContext2D) {
-    this.ctx = ctx;
-    this.reset();
+  constructor (ctx: CanvasRenderingContext2D) {
+    this.ctx = ctx
+    this.reset()
   }
 
-  reset() {
-    this.x = 0;
-    this.y = 0;
-    this.addedX = 0;
-    this.addedY = 0;
-    this.radius = 0;
+  reset () {
+    this.x = 0
+    this.y = 0
+    this.addedX = 0
+    this.addedY = 0
+    this.radius = 0
     this.lightInputMultiplier =
       options.baseLightInputMultiplier +
-      options.addedLightInputMultiplier * Math.random();
+      options.addedLightInputMultiplier * Math.random()
     this.color = options.color.replace(
-      "tone",
+      'tone',
       (options.toneChange * tick).toString()
-    );
-    this.cumulativeTime = 0;
-    this.beginPhase();
+    )
+    this.cumulativeTime = 0
+    this.beginPhase()
   }
 
-  beginPhase() {
-    this.x += this.addedX;
-    this.y += this.addedY;
-    this.time = 0;
+  beginPhase () {
+    this.x += this.addedX
+    this.y += this.addedY
+    this.time = 0
     this.targetTime =
-      (options.baseTime + options.addedTime * Math.random()) | 0;
-    this.radius += this.baseRadius * (Math.random() < 0.5 ? 1 : -1);
-    this.addedX = Math.cos(this.radius);
-    this.addedY = Math.sin(this.radius);
+      (options.baseTime + options.addedTime * Math.random()) | 0
+    this.radius += this.baseRadius * (Math.random() < 0.5 ? 1 : -1)
+    this.addedX = Math.cos(this.radius)
+    this.addedY = Math.sin(this.radius)
     if (
       Math.random() < options.dieChance ||
       this.x > dieX ||
@@ -89,32 +89,32 @@ class Line {
       dieY > dieY ||
       this.y < -dieY
     )
-      this.reset();
+      this.reset()
   }
 
-  step() {
-    ++this.time;
-    ++this.cumulativeTime;
-    if (this.time >= this.targetTime) this.beginPhase();
+  step () {
+    ++this.time
+    ++this.cumulativeTime
+    if (this.time >= this.targetTime) this.beginPhase()
     const prop = this.time / this.targetTime,
       wave = Math.sin((prop * Math.PI) / 2),
       x = this.addedX * wave,
-      y = this.addedY * wave;
-    this.ctx.shadowBlur = prop * options.shadowToTimePropMult;
+      y = this.addedY * wave
+    this.ctx.shadowBlur = prop * options.shadowToTimePropMult
     this.ctx.fillStyle = this.ctx.shadowColor = this.color.replace(
-      "light",
+      'light',
       (
         options.baseLight +
         options.addedLight *
           Math.sin(this.cumulativeTime * this.lightInputMultiplier)
       ).toString()
-    );
+    )
     this.ctx.fillRect(
       options.ox + (this.x + x) * options.len,
       options.oy + (this.y + y) * options.len,
       2,
       2
-    );
+    )
     if (Math.random() < options.sparkChance)
       this.ctx.fillRect(
         options.ox +
@@ -127,7 +127,7 @@ class Line {
           options.sparkSize / 2,
         options.sparkSize,
         options.sparkSize
-      );
+      )
   }
 }
 
@@ -135,64 +135,37 @@ class Line {
 export default class LoginBg extends Vue {
 
   ctx: any
-  mounted() {
-    const bg = document.getElementById("bgCanvas") as HTMLCanvasElement,
-      bgMain = document.getElementById("bg") as HTMLDivElement;
-    const ctx = bg.getContext("2d") as CanvasRenderingContext2D;
+  mounted () {
+    const bg = document.getElementById('bgCanvas') as HTMLCanvasElement,
+      bgMain = document.getElementById('bg') as HTMLDivElement
+    const ctx = bg.getContext('2d') as CanvasRenderingContext2D
     this.ctx = ctx
-    clientWidth = bg.width = bgMain.clientWidth;
-    clientHeight = bg.height = bgMain.clientHeight;
-    options.ox = clientWidth / 2;
-    options.oy = clientHeight / 2;
-    dieX = clientWidth / 2 / options.len;
-    dieY = clientHeight / 2 / options.len;
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, clientWidth, clientHeight);
-    function loop() {
-      // setTimeout(()=>requestAnimationFrame(loop),  50)
-      requestAnimationFrame(loop);
-      ++tick;
-      ctx.globalCompositeOperation = "source-over";
-      ctx.shadowBlur = 0;
-      // ctx.fillStyle = "rgba(0, 0, 0, alp)".replace(
-      //   "alp",
-      //   options.repaintAlpha.toString()
-      // );
-      ctx.fillStyle = "#1f2029"
-      ctx.fillRect(0, 0, clientWidth, clientHeight);
-      ctx.globalCompositeOperation = "lighter";
-      if (lines.length < options.count && Math.random() < options.spawnChance)
-        lines.push(new Line(ctx));
-      lines.map((line: any) => line.step());
-    }
-    window.addEventListener("resize", (e: Event) => {
-      clientWidth = bg.width = bgMain.clientWidth;
-      clientHeight = bg.height = bgMain.clientHeight;
-      ctx.fillStyle = "black";
-      ctx.fillRect(0, 0, clientWidth, clientHeight);
-      options.ox = clientWidth / 2;
-      options.oy = clientHeight / 2;
-      dieX = clientWidth / 2 / options.len;
-      dieY = clientHeight / 2 / options.len;
-    });
-    this.loop();
+    clientWidth = bg.width = bgMain.clientWidth
+    clientHeight = bg.height = bgMain.clientHeight
+    options.ox = clientWidth / 2
+    options.oy = clientHeight / 2
+    dieX = clientWidth / 2 / options.len
+    dieY = clientHeight / 2 / options.len
+    ctx.fillStyle = 'black'
+    ctx.fillRect(0, 0, clientWidth, clientHeight)
+    this.loop()
   }
 
   loop () {
     // setTimeout(()=>requestAnimationFrame(loop),  50)
-    requestAnimationFrame(this.loop.bind(this));
-    ++tick;
-    this.ctx.globalCompositeOperation = "source-over";
-    this.ctx.shadowBlur = 0;
-    this.ctx.fillStyle = "rgba(0, 0, 0, alp)".replace(
-      "alp",
+    requestAnimationFrame(this.loop.bind(this))
+    ++tick
+    this.ctx.globalCompositeOperation = 'source-over'
+    this.ctx.shadowBlur = 0
+    this.ctx.fillStyle = 'rgba(0, 0, 0, alp)'.replace(
+      'alp',
       options.repaintAlpha.toString()
-    );
-    this.ctx.fillRect(0, 0, clientWidth, clientHeight);
-    this.ctx.globalCompositeOperation = "lighter";
+    )
+    this.ctx.fillRect(0, 0, clientWidth, clientHeight)
+    this.ctx.globalCompositeOperation = 'lighter'
     if (lines.length < options.count && Math.random() < options.spawnChance)
-      lines.push(new Line(this.ctx));
-    lines.map((line: any) => line.step());
+      lines.push(new Line(this.ctx))
+    lines.map((line: any) => line.step())
   }
 }
 interface Option {

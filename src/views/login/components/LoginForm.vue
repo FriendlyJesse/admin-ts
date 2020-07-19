@@ -39,7 +39,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { ElForm } from 'element-ui/types/form';
+import { ElForm } from 'element-ui/types/form'
 
 @Component
 export default class LoginForm extends Vue {
@@ -62,12 +62,12 @@ export default class LoginForm extends Vue {
   submitForm (formName: string) {
     (this.$refs[formName] as ElForm).validate((valid) => {
       if (valid) {
-        alert('submit!');
+        alert('submit!')
       } else {
-        console.log('error submit!!');
-        return false;
+        console.log('error submit!!')
+        return false
       }
-    });
+    })
   }
 }
 </script>
@@ -86,7 +86,7 @@ export default class LoginForm extends Vue {
     line-height: 48px;
     letter-spacing: 0.5px;
     background-color: #1f2029;
-    
+
     border: none;
     box-shadow: 0 4px 8px 0 rgba(21,21,21,.2);
     &__inner {

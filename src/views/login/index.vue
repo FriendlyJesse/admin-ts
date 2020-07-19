@@ -6,18 +6,29 @@
         <span>登陆</span>
         <span>注册</span>
       </h2>
-      <div @click="flag = !flag" class="login__bar">
-        <i class="iconfont iconziyuan" :class="{active: flag}"></i>
+      <div
+        class="login__bar"
+        @click="flag = !flag"
+      >
+        <i
+          class="iconfont iconziyuan"
+          :class="{active: flag}"
+        />
       </div>
       <div class="card">
-        <div class="card__wrapper" :class="{active: flag}">
+        <div
+          class="card__wrapper"
+          :class="{active: flag}"
+        >
           <div class="card-front">
             <div class="card-content">
               <login-form />
             </div>
           </div>
           <div class="card-back">
-            <div class="card-content">456</div>
+            <div class="card-content">
+              456
+            </div>
           </div>
         </div>
       </div>
@@ -31,12 +42,12 @@ import LoginBg from './components/LoginBg.vue'
 import LoginForm from './components/LoginForm.vue'
 
 
-@Component({
+@Component( {
   components: {
     LoginBg,
     LoginForm
   }
-})
+} )
 export default class Login extends Vue {
 
   private flag = false
