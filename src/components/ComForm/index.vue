@@ -1,58 +1,131 @@
 <template>
-  <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-    <el-form-item label="活动名称" prop="name">
-      <el-input v-model="ruleForm.name"></el-input>
+  <el-form
+    ref="ruleForm"
+    :model="ruleForm"
+    :rules="rules"
+    label-width="100px"
+    class="demo-ruleForm"
+  >
+    <el-form-item
+      label="活动名称"
+      prop="name"
+    >
+      <el-input v-model="ruleForm.name" />
     </el-form-item>
-    <el-form-item label="活动区域" prop="region">
-      <el-select v-model="ruleForm.region" placeholder="请选择活动区域">
-        <el-option label="区域一" value="shanghai"></el-option>
-        <el-option label="区域二" value="beijing"></el-option>
+    <el-form-item
+      label="活动区域"
+      prop="region"
+    >
+      <el-select
+        v-model="ruleForm.region"
+        placeholder="请选择活动区域"
+      >
+        <el-option
+          label="区域一"
+          value="shanghai"
+        />
+        <el-option
+          label="区域二"
+          value="beijing"
+        />
       </el-select>
     </el-form-item>
-    <el-form-item label="活动时间" required>
+    <el-form-item
+      label="活动时间"
+      required
+    >
       <el-col :span="11">
         <el-form-item prop="date1">
-          <el-date-picker type="date" placeholder="选择日期" v-model="ruleForm.date1" style="width: 100%;"></el-date-picker>
+          <el-date-picker
+            v-model="ruleForm.date1"
+            type="date"
+            placeholder="选择日期"
+            style="width: 100%;"
+          />
         </el-form-item>
       </el-col>
-      <el-col class="line" :span="2">-</el-col>
+      <el-col
+        class="line"
+        :span="2"
+      >
+        -
+      </el-col>
       <el-col :span="11">
         <el-form-item prop="date2">
-          <el-time-picker placeholder="选择时间" v-model="ruleForm.date2" style="width: 100%;"></el-time-picker>
+          <el-time-picker
+            v-model="ruleForm.date2"
+            placeholder="选择时间"
+            style="width: 100%;"
+          />
         </el-form-item>
       </el-col>
     </el-form-item>
-    <el-form-item label="即时配送" prop="delivery">
-      <el-switch v-model="ruleForm.delivery"></el-switch>
+    <el-form-item
+      label="即时配送"
+      prop="delivery"
+    >
+      <el-switch v-model="ruleForm.delivery" />
     </el-form-item>
-    <el-form-item label="活动性质" prop="type">
+    <el-form-item
+      label="活动性质"
+      prop="type"
+    >
       <el-checkbox-group v-model="ruleForm.type">
-        <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
-        <el-checkbox label="地推活动" name="type"></el-checkbox>
-        <el-checkbox label="线下主题活动" name="type"></el-checkbox>
-        <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
+        <el-checkbox
+          label="美食/餐厅线上活动"
+          name="type"
+        />
+        <el-checkbox
+          label="地推活动"
+          name="type"
+        />
+        <el-checkbox
+          label="线下主题活动"
+          name="type"
+        />
+        <el-checkbox
+          label="单纯品牌曝光"
+          name="type"
+        />
       </el-checkbox-group>
     </el-form-item>
-    <el-form-item label="特殊资源" prop="resource">
+    <el-form-item
+      label="特殊资源"
+      prop="resource"
+    >
       <el-radio-group v-model="ruleForm.resource">
-        <el-radio label="线上品牌商赞助"></el-radio>
-        <el-radio label="线下场地免费"></el-radio>
+        <el-radio label="线上品牌商赞助" />
+        <el-radio label="线下场地免费" />
       </el-radio-group>
     </el-form-item>
-    <el-form-item label="活动形式" prop="desc">
-      <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+    <el-form-item
+      label="活动形式"
+      prop="desc"
+    >
+      <el-input
+        v-model="ruleForm.desc"
+        type="textarea"
+      />
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="submitForm('ruleForm')">立即创建</el-button>
-      <el-button @click="resetForm('ruleForm')">重置</el-button>
+      <el-button
+        type="primary"
+        @click="submitForm('ruleForm')"
+      >
+        立即创建
+      </el-button>
+      <el-button @click="resetForm('ruleForm')">
+        重置
+      </el-button>
     </el-form-item>
   </el-form>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
-import { ElForm } from 'element-ui/types/form';
+import { ElForm } from 'element-ui/types/form'
 
+@Component
 export default class ComForm extends Vue {
   ruleForm = {
     name: '',
@@ -90,18 +163,18 @@ export default class ComForm extends Vue {
     ]
   }
 
-  submitForm(formName: string) {
+  submitForm (formName: string) {
     (this.$refs[formName] as ElForm).validate((valid) => {
       if (valid) {
-        alert('submit!');
+        alert('submit!')
       } else {
-        console.log('error submit!!');
-        return false;
+        console.log('error submit!!')
+        return false
       }
-    });
+    })
   }
-    resetForm(formName: string) {
-      (this.$refs[formName] as ElForm).resetFields();
-    }
+  resetForm (formName: string) {
+    (this.$refs[formName] as ElForm).resetFields()
+  }
 }
 </script>

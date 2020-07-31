@@ -3,11 +3,21 @@ import VueRouter, { RouteConfig } from 'vue-router'
 
 Vue.use(VueRouter)
 
-  const routes: Array<RouteConfig> = [
+const routes: Array<RouteConfig> = [
   {
     path: '/',
     name: 'Login',
     component: () => import('@/views/login/index.vue')
+  },
+  {
+    path: '/visual',
+    name: 'Visual',
+    component: () => import('@/views/visual/index.vue')
+  },
+  {
+    path: '/charts',
+    name: 'Charts',
+    component: () => import('@/views/charts/index.vue')
   },
 ]
 

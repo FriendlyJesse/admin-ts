@@ -34,7 +34,7 @@ export default class Bomb {
     sparkChance: 0.1,
     sparkDist: 10,
     sparkSize: 2,
-    color: `hsl(tone, 100%, light%)`,
+    color: 'hsl(tone, 100%, light%)',
     baseLight: 50,
     addedLight: 10,
     shadowToTimePropMult: 6,
@@ -46,7 +46,7 @@ export default class Bomb {
     toneChange: 0.1
   }
   private baseRadius = (Math.PI * 2) / 6
-  
+
   // 构造参数
   private canvasEl: HTMLCanvasElement
   private ctx: CanvasRenderingContext2D
@@ -56,7 +56,7 @@ export default class Bomb {
   private dieX = 0
   private dieY = 0
   private tick = 0
-  
+
   // line 参数
   private lines: any[] = []
   line: any = {
@@ -66,7 +66,7 @@ export default class Bomb {
     addedY: 0,
     radius: 0,
     lightInputMultiplier: 0,
-    color: "",
+    color: '',
     cumulativeTime: 0,
     time: 0,
     targetTime: 0
@@ -77,7 +77,7 @@ export default class Bomb {
     this.canvasEl.width = (this.canvasEl.parentNode as any).clientWidth
     this.canvasEl.height = (this.canvasEl.parentNode as any).clientHeight
     this.ctx = this.canvasEl.getContext('2d') as CanvasRenderingContext2D
-    
+
     this.init()
   }
 
@@ -88,10 +88,10 @@ export default class Bomb {
     this.options.oy = this.clientHeight / 2
     this.dieX = this.clientWidth / 2 / this.options.len
     this.dieY = this.clientHeight / 2 / this.options.len
-    
+
     this.ctx.fillStyle = 'black'
     this.ctx.fillRect(0, 0, this.clientWidth, this.clientHeight)
-    
+
     this.loop()
   }
 
@@ -99,10 +99,10 @@ export default class Bomb {
     const ctx = this.ctx
 
     requestAnimationFrame(this.loop.bind(this))
-    
+
     ++this.tick
-    ctx.globalCompositeOperation = "source-over"
-    ctx.globalCompositeOperation = "source-over"
+    ctx.globalCompositeOperation = 'source-over'
+    ctx.globalCompositeOperation = 'source-over'
     ctx.shadowBlur = 0
     ctx.fillStyle = 'rgba(0, 0, 0, alp)'.replace('alp', this.options.repaintAlpha.toString())
     ctx.fillRect(0, 0, this.clientWidth, this.clientHeight)
@@ -114,31 +114,31 @@ export default class Bomb {
   }
 
   private reset (line: any) {
-    line.x = 0;
-    line.y = 0;
-    line.addedX = 0;
-    line.addedY = 0;
-    line.radius = 0;
+    line.x = 0
+    line.y = 0
+    line.addedX = 0
+    line.addedY = 0
+    line.radius = 0
     line.lightInputMultiplier =
       this.options.baseLightInputMultiplier +
-      this.options.addedLightInputMultiplier * Math.random();
+      this.options.addedLightInputMultiplier * Math.random()
     line.color = this.options.color.replace(
-      "tone",
+      'tone',
       (this.options.toneChange * this.tick).toString()
-    );
-    line.cumulativeTime = 0;
+    )
+    line.cumulativeTime = 0
     this.beginPhase(line)
   }
 
-  beginPhase(line: any) {
+  beginPhase (line: any) {
     line.x += line.addedX
     line.y += line.addedY
     line.time = 0
     line.targetTime =
-      (this.options.baseTime + this.options.addedTime * Math.random()) | 0;
-    line.radius += this.baseRadius * (Math.random() < 0.5 ? 1 : -1);
-    line.addedX = Math.cos(line.radius);
-    line.addedY = Math.sin(line.radius);
+      (this.options.baseTime + this.options.addedTime * Math.random()) | 0
+    line.radius += this.baseRadius * (Math.random() < 0.5 ? 1 : -1)
+    line.addedX = Math.cos(line.radius)
+    line.addedY = Math.sin(line.radius)
     if (
       Math.random() < this.options.dieChance ||
       line.x > this.dieX ||
@@ -149,29 +149,29 @@ export default class Bomb {
       this.reset(line)
   }
 
-  step(line: any) {
-    ++line.time;
-    ++line.cumulativeTime;
-    if (line.time >= line.targetTime) this.beginPhase(line);
+  step (line: any) {
+    ++line.time
+    ++line.cumulativeTime
+    if (line.time >= line.targetTime) this.beginPhase(line)
     const prop = line.time / line.targetTime,
       wave = Math.sin((prop * Math.PI) / 2),
       x = line.addedX * wave,
-      y = line.addedY * wave;
-    this.ctx.shadowBlur = prop * this.options.shadowToTimePropMult;
+      y = line.addedY * wave
+    this.ctx.shadowBlur = prop * this.options.shadowToTimePropMult
     this.ctx.fillStyle = this.ctx.shadowColor = line.color.replace(
-      "light",
+      'light',
       (
         this.options.baseLight +
         this.options.addedLight *
         Math.sin(line.cumulativeTime * line.lightInputMultiplier)
       ).toString()
-    );
+    )
     this.ctx.fillRect(
       this.options.ox + (line.x + x) * this.options.len,
       this.options.oy + (line.y + y) * this.options.len,
       2,
       2
-    );
+    )
     if (Math.random() < this.options.sparkChance)
       this.ctx.fillRect(
         this.options.ox +
@@ -184,7 +184,7 @@ export default class Bomb {
         this.options.sparkSize / 2,
         this.options.sparkSize,
         this.options.sparkSize
-      );
+      )
   }
 
 }
