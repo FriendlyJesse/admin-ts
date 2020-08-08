@@ -33,6 +33,8 @@ module.exports = {
     'no-trailing-spaces': 2, // 一行结束后面有空格就发出警告
     'key-spacing': [0, { 'beforeColon': false, 'afterColon': true }], // 对象字面量中冒号的前后空格
     'quotes': [1, 'single'], // 引号类型 `` "" ''
-    '@typescript-eslint/no-explicit-any': 'off' // 允许不明确的使用any
+    '@typescript-eslint/no-explicit-any': 'off', // 允许不明确的使用any
+    'array-bracket-spacing': [ 'error', 'always' ], // 数组内左右空格
+    'object-curly-spacing': [ 'error', 'always' ] // 对象内左右空格
   }
 }
