@@ -49,7 +49,12 @@
       </el-header>
 
       <el-main>
-        <router-view />
+        <transition
+          name="el-zoom-in-center"
+          :duration="{ enter: 500, leave: 0 }"
+        >
+          <router-view />
+        </transition>
       </el-main>
     </el-container>
   </el-container>
