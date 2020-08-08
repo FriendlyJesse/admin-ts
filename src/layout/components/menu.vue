@@ -47,7 +47,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 
 @Component
-export default class App extends Vue {
+export default class Menu extends Vue {
 
   menuList = [
     {
@@ -86,15 +86,13 @@ export default class App extends Vue {
 </script>
 
 <style lang="scss" scoped>
-@import url('../../styles/_variable.scss');
-
 .el-menu {
   border: none;
-  background: #11111b;
+  background: $BG_COLOR;
   &-item {
-    background: #11111b;
+    background: $BG_COLOR;
     font-size: 16px;
-    color: #68676c;
+    color: $FONT_COLOR;
     .iconfont {
       color: $FONT_COLOR;
     }
@@ -107,7 +105,7 @@ export default class App extends Vue {
       transform: translateY(-50%);
     }
     &.is-active {
-      background: linear-gradient(to right,#402f42 0,#221c2a 10%, #11111b 20%, #11111b 100%);
+      background: linear-gradient(to right,#402f42 0,#221c2a 10%, $BG_COLOR 20%, $BG_COLOR 100%);
       .iconfont {
         background-image: -webkit-linear-gradient(bottom,#552589,#b55dd8,#da82b2);
         background-clip: text;

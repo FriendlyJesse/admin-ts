@@ -40,7 +40,7 @@ export default class Charts extends Vue {
     country: '中国'
   }
 
-  @Watch('formData', {deep: true})
+  @Watch('formData', { deep: true })
   onFormChange (newVal: any) {
     this.setWorld(newVal.country)
   }
@@ -61,7 +61,7 @@ export default class Charts extends Vue {
       qps.push(el.qps)
     });
 
-    [{name: '总访问量', data: pv, color: '#5C8BFB'}, {name: '请求并发', data: qps, color: '#63B7FC'}].forEach((item: any) => {
+    [ { name: '总访问量', data: pv, color: '#5C8BFB' }, { name: '请求并发', data: qps, color: '#63B7FC' } ].forEach((item: any) => {
       seriesData.push({
         name: item.name,
         data: item.data,

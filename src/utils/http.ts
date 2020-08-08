@@ -9,7 +9,7 @@ export default new class Interceptors {
 
   constructor () {
     // 创建 axios 实例
-    this.instance = axios.create({baseURL: process.env.VUE_APP_API_URL})
+    this.instance = axios.create({ baseURL: process.env.VUE_APP_API_URL })
     this.initInterceptors()
   }
 

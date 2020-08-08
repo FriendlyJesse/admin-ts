@@ -131,7 +131,7 @@ export default class VisualMap extends Vue {
           {
             fromName: item.from,
             toName: item.to,
-            coords: [fromCity.coords, toCity.coords]
+            coords: [ fromCity.coords, toCity.coords ]
           }
         ]
       })

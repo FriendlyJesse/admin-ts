@@ -31,14 +31,14 @@ export default {
   },
   xAxis: {
     type: 'category',
-    axisLine: {show: false}, // 去掉轴线
-    axisTick: {show:false}, // 去掉刻度
-    data: ['14:30', '14:45', '15:00', '15:15', '15:30', '15:45', '16:00']
+    axisLine: { show: false }, // 去掉轴线
+    axisTick: { show:false }, // 去掉刻度
+    data: [ '14:30', '14:45', '15:00', '15:15', '15:30', '15:45', '16:00' ]
   },
   yAxis: {
     type: 'value',
-    axisLine: {show: false}, // 去掉轴线
-    axisTick: {show:false}, // 去掉刻度
+    axisLine: { show: false }, // 去掉轴线
+    axisTick: { show:false }, // 去掉刻度
     axisLabel: {
       formatter: function (value: any) {
         if((value / (1024 * 1024 * 1024)) > 10) {
@@ -53,7 +53,7 @@ export default {
       }
     }
   },
-  dataZoom: [{
+  dataZoom: [ {
     type: 'slider',
     show: true,
     start: 0,
@@ -69,7 +69,7 @@ export default {
   series: [
     {
       name: '回源流量',
-      data: [0, .5, .6, .8, .1, .3, .6],
+      data: [ 0, .5, .6, .8, .1, .3, .6 ],
       type: 'line',
       smooth: true,
       itemStyle:{
@@ -81,7 +81,7 @@ export default {
     },
     {
       name: '命中缓存流量',
-      data: [0, .8, .8, .6, .5, .1, .6],
+      data: [ 0, .8, .8, .6, .5, .1, .6 ],
       type: 'line',
       smooth: true,
       itemStyle:{
@@ -93,7 +93,7 @@ export default {
     },
     {
       name: '总流量',
-      data: [0, .1, .5, 0.4, .6, .8, .6],
+      data: [ 0, .1, .5, 0.4, .6, .8, .6 ],
       type: 'line',
       smooth: true,
       itemStyle:{

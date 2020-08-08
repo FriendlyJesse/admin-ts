@@ -21,13 +21,13 @@ export default {
   },
   xAxis: {
     type: 'category',
-    axisLine: {show: false}, // 去掉轴线
-    axisTick: {show:false}, // 去掉刻度
+    axisLine: { show: false }, // 去掉轴线
+    axisTick: { show:false }, // 去掉刻度
   },
   yAxis: {
     type: 'value',
-    axisLine: {show: false}, // 去掉轴线
-    axisTick: {show:false}, // 去掉刻度
+    axisLine: { show: false }, // 去掉轴线
+    axisTick: { show:false }, // 去掉刻度
     axisLabel: {
       formatter: function (value: any) {
         if((value / (1024 * 1024 * 1024)) > 10) {
@@ -42,7 +42,7 @@ export default {
       }
     }
   },
-  dataZoom: [{
+  dataZoom: [ {
     type: 'slider',
     show: true,
     start: 0,
@@ -58,7 +58,7 @@ export default {
   series: [
     {
       name: '流量',
-      data: [0, 100, 300, 150, 500, 100, 500],
+      data: [ 0, 100, 300, 150, 500, 100, 500 ],
       type: 'line',
       smooth: true,
       itemStyle:{

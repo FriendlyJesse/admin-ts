@@ -1,3 +1,6 @@
+// eslint-disable-next-line
+const path = require('path')
+
 module.exports = {
   chainWebpack: config => {
     config
@@ -7,6 +10,7 @@ module.exports = {
         return args
       })
   },
+
   devServer: {
     proxy: {
       '/api': {
@@ -17,6 +21,16 @@ module.exports = {
           '^/api': '/' // 路径转发代理
         }
       }
+    }
+  },
+
+  pluginOptions: {
+    'style-resources-loader': { // 注入全局变量
+      preProcessor: 'scss',
+      patterns: [
+        // 加上自己的文件路径，不能使用别名
+        path.resolve(__dirname, './src/styles/_variable.scss'),
+      ]
     }
   }
 }
