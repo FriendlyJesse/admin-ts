@@ -33,15 +33,19 @@
           {{ $route.meta.title }}
         </h4>
         <div>
-          <el-dropdown>
+          <el-dropdown @command="onSetTheme">
             <i
               class="el-icon-setting"
               style="margin-right: 15px"
             />
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>查看</el-dropdown-item>
-              <el-dropdown-item>新增</el-dropdown-item>
-              <el-dropdown-item>删除</el-dropdown-item>
+              <el-dropdown-item
+                v-for="item in themes"
+                :key="item.command"
+                :command="item.command"
+              >
+                {{ item.name }}
+              </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
           <span>王小虎</span>
@@ -63,38 +67,67 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import Menu from './components/Menu.vue'
+import { Mutation } from 'vuex-class'
+
+interface ThemesInterface {
+  name: string;
+  command: string;
+}
 
 @Component({
   components: {
     Menu
   }
 })
-export default class Layout extends Vue {}
+export default class Layout extends Vue {
+  @Mutation('SET_THEME') setTheme: any
+
+  private themes: ThemesInterface[] = [
+    {
+      name: '默认',
+      command: 'default'
+    },
+    {
+      name: '明亮',
+      command: 'light'
+    },
+    {
+      name: '暗黑',
+      command: 'night'
+    }
+  ]
+
+  private onSetTheme (val: string) {
+    this.setTheme(val)
+  }
+
+}
 </script>
 
 <style lang="scss">
   .el-container {
-    background-color: $BG_COLOR;
+    background-color: var(--BG_COLOR);
     height: 100vh;
   }
   .el-header {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
-    background-color: $BG_COLOR;
     color: #333;
     line-height: 60px;
 
     .title {
       font-size: 25px;
-      color: $TITLE_COLOR;
+      color: var(--TITLE_COLOR);
     }
   }
 
   .el-aside {
-    width: 200px;
-    background-color: $BG_COLOR;
+    position: relative;
+    background-color: var(--BG_COLOR);
+    box-shadow: 0px 0px 60px 0px rgba(158, 178, 215, 0.16);
     color: #333;
+
     .info {
       padding-bottom: 60px;
       text-align: center;
@@ -120,8 +153,12 @@ export default class Layout extends Vue {}
         color: #fff;
       }
       &__id {
-        color: $FONT_COLOR;
+        color: var(--FONT_COLOR);
       }
     }
+  }
+
+  .el-icon-setting {
+    color: var(--TITLE_COLOR);
   }
 </style>

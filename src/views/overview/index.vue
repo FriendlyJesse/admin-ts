@@ -10,9 +10,3 @@ import { Component, Vue } from 'vue-property-decorator'
 @Component
 export default class Overview extends Vue {}
 </script>
-
-<style lang="scss" scoped>
-.overview {
-  color: #fff;
-}
-</style>

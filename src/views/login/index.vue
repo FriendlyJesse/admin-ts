@@ -56,8 +56,6 @@ export default class Login extends Vue {
 </script>
 
 <style lang="scss">
-$color: #c4c3ca;
-
 .login {
   height: 100%;
 
@@ -72,7 +70,7 @@ $color: #c4c3ca;
   &__top {
     margin: 0;
     padding-bottom: 16px;
-    color: $color;
+    color: --FONT_COLOR;
     font-size: 16px;
     text-align: center;
     span {

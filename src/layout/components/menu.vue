@@ -88,13 +88,15 @@ export default class Menu extends Vue {
 <style lang="scss" scoped>
 .el-menu {
   border: none;
-  background: $BG_COLOR;
+  width: 200px;
+  background: var(--BG_COLOR);
   &-item {
-    background: $BG_COLOR;
+    width: 200px;
+    background: var(--BG_COLOR);
     font-size: 16px;
-    color: $FONT_COLOR;
+    color: var(--FONT_COLOR);
     .iconfont {
-      color: $FONT_COLOR;
+      color: var(--FONT_COLOR);
     }
     .el-icon-arrow-right {
       visibility: hidden;
@@ -105,7 +107,9 @@ export default class Menu extends Vue {
       transform: translateY(-50%);
     }
     &.is-active {
-      background: linear-gradient(to right,#402f42 0,#221c2a 10%, $BG_COLOR 20%, $BG_COLOR 100%);
+    width: 200px;
+    width: 200px;
+      background: linear-gradient(to right,#402f42 0,#221c2a 10%, var(--BG_COLOR) 20%, var(--BG_COLOR) 100%);
       .iconfont {
         background-image: -webkit-linear-gradient(bottom,#552589,#b55dd8,#da82b2);
         background-clip: text;
