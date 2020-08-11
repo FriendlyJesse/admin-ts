@@ -50,9 +50,10 @@ export default new class Interceptors {
     }
   }
 
-  public async delete (url: string, config: object = {}) {
+  public async delete (url: string, config: object = {}) { // 参数在 config 中，以 {data: params}传参
     try {
-      await this.instance.delete(url, config)
+      const result = await this.instance.delete(url, config)
+      return result.data
     } catch (error) {
       console.error(error)
     }
@@ -60,7 +61,8 @@ export default new class Interceptors {
 
   public async put (url: string, data: any = {}, config: object = {}) {
     try {
-      await this.instance.put(url, data, config)
+      const result = await this.instance.put(url, data, config)
+      return result.data
     } catch (error) {
       console.error(error)
     }
@@ -68,7 +70,8 @@ export default new class Interceptors {
 
   public async get (url: string, parmas: any = {}, config: object = {}) {
     try {
-      await this.instance.get(url, parmas, config)
+      const result = await this.instance.get(url, parmas, config)
+      return result.data
     } catch (error) {
       console.error(error)
     }
@@ -106,6 +109,7 @@ export default new class Interceptors {
         `color:${randomColor};`
       )
       console.log('| 请求地址：', response.config.url)
+      console.log('| 请求方式：', response.config.method)
       console.log('| 请求参数：', response.config.data)
       console.log('| 返回数据：', response.data)
       console.log(

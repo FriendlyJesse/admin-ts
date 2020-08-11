@@ -48,7 +48,7 @@
               </el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
-          <span>王小虎</span>
+          <span class="username">王小虎</span>
         </div>
       </el-header>
 
@@ -120,6 +120,9 @@ export default class Layout extends Vue {
       font-size: 25px;
       color: var(--TITLE_COLOR);
     }
+    .username {
+      color: var(--FONT_COLOR);
+    }
   }
 
   .el-aside {
@@ -150,7 +153,7 @@ export default class Layout extends Vue {
       }
       &__name {
         font-size: 15px;
-        color: #fff;
+        color: var(--DISPLAY_COLOR);
       }
       &__id {
         color: var(--FONT_COLOR);

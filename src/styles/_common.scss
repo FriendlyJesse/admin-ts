@@ -2,6 +2,10 @@
   @include clearfix;
 }
 
+.el-button + span {
+  margin-left: 10px;
+}
+
 @font-face{
   font-family: 'Poppins'; 
   src: url('../assets/fonts/Poppins.ttf');
