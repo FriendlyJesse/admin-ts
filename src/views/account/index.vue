@@ -11,7 +11,10 @@
       @size-change="sizeChange"
     >
       <template #operation>
-        <el-table-column label="操作">
+        <el-table-column
+          label="操作"
+          align="center"
+        >
           <template slot-scope="scope">
             <el-button
               type="primary"
@@ -57,7 +60,6 @@ import { getUsers, removeUser } from '@/api/users'
 })
 export default class Account extends pageMixins {
 
-  searchForm: object = {}
   fetchList = getUsers
   columns: Array<object> = [
     {
@@ -74,7 +76,7 @@ export default class Account extends pageMixins {
   ]
 
   private handleDelete (id: number) {
-    this.mixinHandleItem(removeUser, this.getList, { data:{ ids: [ id ] } })
+    this.mixinHandleItem(removeUser, this.getList, { ids: [ id ] })
   }
 
 }

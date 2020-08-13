@@ -40,7 +40,7 @@ export default class Page extends Vue {
     this.listLoading = true
     const query = this.$filterEmptyValue(this.listQuery, this.searchForm)
     const RESULT = await this.fetchList(query)
-    this.tableData = RESULT
+    this.tableData = RESULT.data
     this.total = RESULT.total
     this.listLoading = false
   }

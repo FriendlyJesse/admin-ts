@@ -116,7 +116,7 @@ export default class ComList extends Vue {
 
   private setAttrs (params: object) {
     // eslint-disable-next-line
-      const { slot, ...options }: any = params // 排除 slot
+    const { slot, ...options }: any = params // 排除 slot
     return { align: 'center', ...options }
   }
 

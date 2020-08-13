@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
 import router from '@/router'
-// import state from '@/store/state'
+import state from '@/store/state'
 
-export default new class Interceptors {
+class Interceptors {
 
   public instance: any
 
@@ -13,14 +13,17 @@ export default new class Interceptors {
     this.initInterceptors()
   }
 
+  public getInterceptors () { // 为了获取初始化好的 axios 实例
+    return this.instance
+  }
+
   public initInterceptors () { // 初始化拦截器
 
     // 请求拦截器
     this.instance.interceptors.request.use((config: any) => {
-      // if (state.token && state.userInfo) {
-      //   config.headers.Authorization = `Bearer ${state.token}`
-      //   config.headers.memberId = state.userInfo.id
-      // }
+      if (state.token) {
+        config.headers.Authorization = `Bearer ${state.token}`
+      }
       return config
     }, (error: any) => {
       return Promise.reject(error)
@@ -29,52 +32,11 @@ export default new class Interceptors {
     // 响应拦截器
     this.instance.interceptors.response.use((response: any) => {
       this.responseLog(response)
-      this.errorHandle(response)
-      return response
+      return response.data
     }, (error: any) => {
-      Message({
-        message: error.response.data.message,
-        type: 'error',
-        duration: 5 * 1000
-      })
+      this.errorHandle(error.response)
       return Promise.reject(error)
     })
-  }
-
-  public async post (url: string, data: any = {}, config: object = {}) {
-    try {
-      const result = await this.instance.post(url, data, config)
-      return result.data
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  public async delete (url: string, config: object = {}) { // 参数在 config 中，以 {data: params}传参
-    try {
-      const result = await this.instance.delete(url, config)
-      return result.data
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  public async put (url: string, data: any = {}, config: object = {}) {
-    try {
-      const result = await this.instance.put(url, data, config)
-      return result.data
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
-  public async get (url: string, parmas: any = {}, config: object = {}) {
-    try {
-      const result = await this.instance.get(url, parmas, config)
-      return result.data
-    } catch (error) {
-      console.error(error)
-    }
   }
 
   /**
@@ -90,9 +52,9 @@ export default new class Interceptors {
     case 404:
       Message.error('请求的资源不存在')
       break
-    case 1002:
+    case 1002: // 如果返回 1002 表示未登录
       Message.error('请登录')
-      router.replace('/login') // 如果返回 1002 表示未登录
+      router.replace('/login')
       break
     default:
         // Message.error(' 连接错误 ')
@@ -120,3 +82,5 @@ export default new class Interceptors {
   }
 
 }
+
+export default new Interceptors().getInterceptors()
